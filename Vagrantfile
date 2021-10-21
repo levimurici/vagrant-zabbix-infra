@@ -26,7 +26,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     config.vm.define env['name'] do |srv|
       srv.vm.box      = env['box']
       srv.vm.hostname = env['hostname']
-      srv.vm.network 'private_network', ip: env['ipaddress'], bridge: 'wlp6s0'
+      srv.vm.network 'public_network', ip: env['ipaddress'], bridge: 'wlp6s0'
       srv.vm.provider 'virtualbox' do |vb|
         vb.name   = env['name']
         vb.gui    = false
