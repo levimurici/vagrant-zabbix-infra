@@ -1,0 +1,64 @@
+---
+- hosts: all
+  become: yes
+  become_user: root
+  become_method: sudo
+  tasks:
+    - name: Garantindo /etc/hosts
+      lineinfile:
+        path: /etc/hosts
+        line: "{{ item }}"
+      with_items:
+        - 192.168.1.20 zabbix zabbix.dnd.com.br
+        - 192.168.1.21 prometheus prometheus.dnd.com.br
+
+    - name: Adicionar usuario suporte
+      user:
+        name: suporte
+        shell: /bin/bash
+        password : $1$QbUARykG$p2nthVG8AkDvabKPHwboa1
+
+    - name: Criando o arquivo 98_dnd
+      copy:
+        src: files/98_dnd
+        dest: /etc/sudoers.d
+        mode: 0644
+
+    - name: Ajustando .bashrc do usuario vagrant
+      lineinfile:
+        path: /home/vagrant/.bashrc
+        line: 'sudo su - suporte'
+
+    - name: Instalando pacotes de dependencias
+      apt:
+        name: "{{ packages }}"
+        state: present
+        update_cache: yes
+      vars:
+        packages:
+        - unzip
+        - python3
+        - python3-pip
+        - software-properties-common
+        - vim
+        - telnet
+        - git
+        - python-netaddr
+        - snap
+        - snapd
+        update_cache: yes
+        
+    - name: Criando o arquivo get-pip.py
+      copy:
+        src: files/get-pip.py
+        dest: /tmp
+        mode: 0644
+
+    - name: Atualiza o pip com Python 3
+      shell: python3 get-pip.py
+      args:
+        chdir: /tmp
+
+    - name: Atualiza o timezone
+      shell: timedatectl set-timezone America/Sao_Paulo
+      args:
