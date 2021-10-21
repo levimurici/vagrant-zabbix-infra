@@ -1,0 +1,5 @@
+[wordpress] #Grupo de definição para o ansible
+192.168.1.20 ansible_user=surporte ansible_ssh_private_key_file=id_rsa
+
+[database]
+192.168.1.21 ansible_user=surporte ansible_ssh_private_key_file=id_rsa
