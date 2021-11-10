@@ -15,6 +15,34 @@ resource "aws_instance" "services" {
     }
 }
 
+resource "aws_security_group" "acesso-dnd" {
+  name        = "acesso-dnd"
+  description = "acesso do lab"
+
+  ingress = [
+    {
+      from_port        = 22
+      to_port          = 22
+      protocol         = "tcp"
+      cidr_blocks      = ["177.50.229.182/32"]
+    }
+  ]
+
+/*   egress = [
+    {
+      from_port        = 0
+      to_port          = 0
+      protocol         = "-1"
+      cidr_blocks      = ["10.0.0.0/16"]
+      ipv6_cidr_blocks = ["::/0"]
+    }
+  ] */
+
+  tags = {
+    Name = "ssh"
+  }
+}
+
 /* # Create a VPC
 resource "aws_vpc" "dnd_vpc" {
   cidr_block = "10.0.0.0/16"
