@@ -13,7 +13,7 @@ resource "aws_instance" "services" {
     tags = {
       Name = "Serviços-${count.index}"
     }
-    vpc_security_group_ids = ["sg-058c6f16edd1706cb"] //Security group id
+    vpc_security_group_ids = ["${aws_security_group.acesso-dnd.id}"] //Security group id
 }
 
 resource "aws_security_group" "acesso-dnd" {
