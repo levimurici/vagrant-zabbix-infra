@@ -6,7 +6,7 @@ resource "aws_security_group" "acesso-dnd" {
       from_port        = 22
       to_port          = 22
       protocol         = "tcp"
-      cidr_blocks      = var.cidr_acesso_ssh
+      cidr_blocks      = var.cidrs_acesso_ssh
     }
 
   tags = {
