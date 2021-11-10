@@ -7,7 +7,7 @@ provider "aws" {
 # Instância que irá rodar os microserviços em docker-compose
 resource "aws_instance" "services" {
     count = 1
-    ami = vars.amis["ami-services"] # Ubuntu 20.1 LTS x86
+    ami = var.amis["ami-services"] # Ubuntu 20.1 LTS x86
     instance_type = "t2.micro"
     key_name = "terraform-aws-dnd-devops-labs"
     tags = {
