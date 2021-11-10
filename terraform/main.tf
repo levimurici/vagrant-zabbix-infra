@@ -1,4 +1,4 @@
-terraform {
+/* terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
@@ -6,10 +6,12 @@ terraform {
     }
   }
 }
-
+ */
+ 
 # Configure the AWS Provider
 provider "aws" {
   region = "us-east-1"
+  version = "~> 3.0"
 }
 
 //Instância que irá rodar os microserviços em docker-compose
