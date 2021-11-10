@@ -7,11 +7,11 @@
   }
 }
  */
- 
+
 # Configure the AWS Provider
 provider "aws" {
-  region = "us-east-1"
-  version = "~> 3.0"
+    version = "~> 3.0"
+    region = "us-east-1"
 }
 
 //Instância que irá rodar os microserviços em docker-compose
