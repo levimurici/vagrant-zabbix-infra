@@ -14,22 +14,7 @@ resource "aws_instance" "services" {
       Name = "Serviços-${count.index}"
     }
     vpc_security_group_ids = ["${aws_security_group.acesso-dnd.id}"]
-}
-
-resource "aws_security_group" "acesso-dnd" {
-  name        = "acesso-dnd"
-  description = "acesso do lab"
-
-  ingress  {
-      from_port        = 22
-      to_port          = 22
-      protocol         = "tcp"
-      cidr_blocks      = ["177.50.229.182/32"]
-    }
-
-  tags = {
-    Name = "ssh"
-  }
+    depends_on = [aws_s3_bucket.dump-services]
 }
 
 resource "aws_s3_bucket" "dump-services" {
@@ -46,3 +31,19 @@ resource "aws_s3_bucket" "dump-services" {
 resource "aws_vpc" "dnd_vpc" {
   cidr_block = "10.0.0.0/16"
 } */
+
+resource "aws_security_group" "acesso-dnd" {
+  name        = "acesso-dnd"
+  description = "acesso do lab"
+
+  ingress  {
+      from_port        = 22
+      to_port          = 22
+      protocol         = "tcp"
+      cidr_blocks      = ["177.50.229.182/32"]
+    }
+
+  tags = {
+    Name = "ssh"
+  }
+}
