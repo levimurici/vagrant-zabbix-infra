@@ -5,3 +5,10 @@ variable "amis" {
         "ami-services" = "ami-083654bd07b5da81d"
     }
 }
+
+#Variáveis das imagens
+variable "cdirs_acesso_ssh" {
+    type = "list"
+    /* "dnd-devops-lab" = "177.50.229.182/32" */
+    default = ["177.50.229.182/32"]
+}
