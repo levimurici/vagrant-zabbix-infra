@@ -9,7 +9,7 @@ resource "aws_instance" "services" {
     count = 1
     ami = var.amis["ami-services"] # Ubuntu 20.1 LTS x86
     instance_type = "t2.micro"
-    key_name = "terraform-aws-dnd-devops-labs"
+    key_name = var.key_name["keyname-services"]
     tags = {
       Name = "Serviços-${count.index}"
     }
