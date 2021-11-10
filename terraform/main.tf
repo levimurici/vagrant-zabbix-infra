@@ -13,7 +13,7 @@ resource "aws_instance" "services" {
     tags = {
       Name = "Serviços-${count.index}"
     }
-    vpc_security_group_ids = ["${aws_security_group.acesso-dnd.id}"] //Security group id
+    vpc_security_group_ids = ["${aws_security_group.acesso-dnd.id}"]
 }
 
 resource "aws_security_group" "acesso-dnd" {
@@ -27,17 +27,18 @@ resource "aws_security_group" "acesso-dnd" {
       cidr_blocks      = ["177.50.229.182/32"]
     }
 
-/*   egress {
-      from_port        = 0
-      to_port          = 0
-      protocol         = "-1"
-      cidr_blocks      = ["10.0.0.0/16"]
-      ipv6_cidr_blocks = ["::/0"]
-    }
-*/
-
   tags = {
     Name = "ssh"
+  }
+}
+
+resource "aws_s3_bucket" "dump-services" {
+  bucket = "suricato-dump-services"
+  acl    = "private" // Permissionamento, no caso privado
+
+  tags = {
+    Name        = "suricato-dump-services"
+    Environment = "Dev"
   }
 }
 
