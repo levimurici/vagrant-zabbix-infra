@@ -54,7 +54,7 @@ resource "aws_instance" "zabbix" {
     /* vpc_security_group_ids = ["${aws_security_group.acesso-dnd.id}"] */
     
     network_interface {
-      network_interface_id = aws_network_interface.interface-1.id
+      network_interface_id = aws_network_interface.interface-2.id
       device_index         = 0
     }
 
