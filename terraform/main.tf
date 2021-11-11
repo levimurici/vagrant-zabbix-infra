@@ -14,7 +14,7 @@ resource "aws_instance" "services" {
     tags = {
       Name = "Serviços-${count.index}"
     }
-    vpc_security_group_ids = ["${aws_security_group.acesso-dnd.id}"]
+    /* vpc_security_group_ids = ["${aws_security_group.acesso-dnd.id}"] */
 
     network_interface {
       network_interface_id = aws_network_interface.interface-1.id
