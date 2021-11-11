@@ -18,18 +18,18 @@ resource "aws_subnet" "dnd_subnet" {
   }
 }
 
-resource "aws_network_interface" "interface-2" {
+resource "aws_network_interface" "interface-1" {
   subnet_id   = aws_subnet.dnd_subnet.id
-  private_ips = ["10.0.10.101"]
+  private_ips = ["10.0.10.100"]
 
   tags = {
     Name = "primary_network_interface"
   }
 }
 
-resource "aws_network_interface" "interface-1" {
+resource "aws_network_interface" "interface-2" {
   subnet_id   = aws_subnet.dnd_subnet.id
-  private_ips = ["10.0.10.100", "10.0.10.101"]
+  private_ips = ["10.0.10.101"]
 
   tags = {
     Name = "primary_network_interface"
