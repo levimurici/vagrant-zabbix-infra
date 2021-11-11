@@ -16,7 +16,7 @@ resource "aws_instance" "services" {
     vpc_security_group_ids = ["${aws_security_group.acesso-dnd.id}"]
     depends_on = [aws_s3_bucket.dump-services]
 
-    provisioner "local-exec" {
+/*     provisioner "local-exec" {
       working_dir = "/tmp"
       command     = <<EOT
         if ! ``docker --version > /dev/null 2>&1`` ; then 
@@ -25,7 +25,7 @@ resource "aws_instance" "services" {
           sudo setfacl -m user:`echo $USER`:rw /var/run/docker.sock
         fi
     EOT
-  }
+  } */
 }
 
 resource "aws_instance" "zabbix" {
