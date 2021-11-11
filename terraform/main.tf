@@ -55,7 +55,7 @@ resource "aws_instance" "zabbix" {
     
     network_interface {
       network_interface_id = aws_network_interface.interface-1.id
-      device_index         = 1
+      device_index         = 0
     }
 
 }
