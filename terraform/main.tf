@@ -80,7 +80,7 @@ resource "aws_vpc" "dnd_vpc" {
 }
 
 resource "aws_subnet" "dnd_subnet" {
-  vpc_id            = aws_vpc.my_vpc.id
+  vpc_id            = aws_vpc.dnd_vpc.id
   cidr_block        = "10.0.10.0/24"
   availability_zone = "us-east-1"
 
@@ -90,7 +90,7 @@ resource "aws_subnet" "dnd_subnet" {
 }
 
 resource "aws_network_interface" "interface-1" {
-  subnet_id   = aws_subnet.my_subnet.id
+  subnet_id   = aws_subnet.dnd_subnet.id
   private_ips = ["10.0.10.1"]
 
   tags = {
@@ -99,7 +99,7 @@ resource "aws_network_interface" "interface-1" {
 }
 
 resource "aws_network_interface" "interface-2" {
-  subnet_id   = aws_subnet.my_subnet.id
+  subnet_id   = aws_subnet.dnd_subnet.id
   private_ips = ["10.0.10.2"]
 
   tags = {
