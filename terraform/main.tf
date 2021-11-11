@@ -6,10 +6,7 @@ provider "aws" {
 
 # Instância que irá rodar os microserviços em docker-compose
 resource "aws_instance" "services" {
-    depends_on = [
-      aws_s3_bucket.dump-services, 
-      "null_resource.install_docker",
-      ]
+    depends_on = [aws_s3_bucket.dump-services]
     count = 1
     ami = var.amis["ami-services"] # Ubuntu 20.1 LTS x86
     instance_type = "t2.micro"
