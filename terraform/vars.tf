@@ -18,5 +18,5 @@ variable "amis" {
 variable "cdirs_acesso_ssh" {
     /* type = "list" */
     /* "dnd-devops-lab" = "177.50.229.182/32" */
-    default = ["177.50.229.182/32", "${aws_vpc.dnd_vpc.cidr_block}"]
+    default = ["177.50.229.182/32"]
 }
