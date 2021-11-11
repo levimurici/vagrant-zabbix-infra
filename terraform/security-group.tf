@@ -6,7 +6,7 @@ resource "aws_security_group" "acesso-dnd" {
       from_port        = 22
       to_port          = 22
       protocol         = "tcp"
-      cidr_blocks      = [var.cdirs_acesso_ssh, aws_vpc.dnd_vpc.cidr_block]
+      cidr_blocks      = [var.cdirs_acesso_ssh]
     }
 
   egress  {

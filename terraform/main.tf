@@ -103,6 +103,6 @@ resource "aws_network_interface" "interface-2" {
   private_ips = ["10.0.10.2"]
 
   tags = {
-    Name = "secondary_network_interface"
+    Name = "primary_network_interface"
   }
 }
