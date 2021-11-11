@@ -16,6 +16,11 @@ resource "aws_instance" "services" {
     }
     vpc_security_group_ids = ["${aws_security_group.acesso-dnd.id}"]
 
+    network_interface {
+      network_interface_id = aws_network_interface.interface-1.id
+      device_index         = 0
+    }
+
   provisioner "local-exec" {
     working_dir = "/tmp"
     command     = <<EOT
@@ -47,6 +52,12 @@ resource "aws_instance" "zabbix" {
       Name = "Zabbix-server"
     }
     vpc_security_group_ids = ["${aws_security_group.acesso-dnd.id}"]
+    
+    network_interface {
+      network_interface_id = aws_network_interface.interface-2.id
+      device_index         = 0
+    }
+
 }
 
 resource "aws_s3_bucket" "dump-services" {
@@ -59,7 +70,39 @@ resource "aws_s3_bucket" "dump-services" {
   }
 }
 
-/* # Create a VPC
+# Create a VPC
 resource "aws_vpc" "dnd_vpc" {
   cidr_block = "10.0.0.0/16"
-} */
+
+  tags = {
+    Name = "dnd_vpc"
+  }
+}
+
+resource "aws_subnet" "dnd_subnet" {
+  vpc_id            = aws_vpc.my_vpc.id
+  cidr_block        = "10.0.10.0/24"
+  availability_zone = "us-east-1"
+
+  tags = {
+    Name = "dnd_subnet"
+  }
+}
+
+resource "aws_network_interface" "interface-1" {
+  subnet_id   = aws_subnet.my_subnet.id
+  private_ips = ["10.0.10.1"]
+
+  tags = {
+    Name = "primary_network_interface"
+  }
+}
+
+resource "aws_network_interface" "interface-2" {
+  subnet_id   = aws_subnet.my_subnet.id
+  private_ips = ["10.0.10.2"]
+
+  tags = {
+    Name = "secondary_network_interface"
+  }
+}
