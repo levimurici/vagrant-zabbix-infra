@@ -6,6 +6,11 @@ provider "aws" {
 
 # Instância que irá rodar os microserviços em docker-compose
 resource "aws_instance" "services" {
+    depends_on = [
+      aws_s3_bucket.dump-services, 
+      "null_resource.install_docker",
+      "null_resource.install_services"
+      ]
     count = 1
     ami = var.amis["ami-services"] # Ubuntu 20.1 LTS x86
     instance_type = "t2.micro"
@@ -14,9 +19,8 @@ resource "aws_instance" "services" {
       Name = "Serviços-${count.index}"
     }
     vpc_security_group_ids = ["${aws_security_group.acesso-dnd.id}"]
-    depends_on = [aws_s3_bucket.dump-services]
 
-/*     provisioner "local-exec" {
+/*  provisioner "local-exec" {
       working_dir = "/tmp"
       command     = <<EOT
         if ! ``docker --version > /dev/null 2>&1`` ; then 
