@@ -54,8 +54,8 @@ resource "aws_instance" "zabbix" {
     vpc_security_group_ids = ["${aws_security_group.acesso-dnd.id}"]
     
     network_interface {
-      network_interface_id = aws_network_interface.interface-2.id
-      device_index         = 0
+      network_interface_id = aws_network_interface.interface-1.id
+      device_index         = 1
     }
 
 }
@@ -91,16 +91,7 @@ resource "aws_subnet" "dnd_subnet" {
 
 resource "aws_network_interface" "interface-1" {
   subnet_id   = aws_subnet.dnd_subnet.id
-  private_ips = ["10.0.10.1"]
-
-  tags = {
-    Name = "primary_network_interface"
-  }
-}
-
-resource "aws_network_interface" "interface-2" {
-  subnet_id   = aws_subnet.dnd_subnet.id
-  private_ips = ["10.0.10.2"]
+  private_ips = ["10.0.10.1", "10.0.10.1"]
 
   tags = {
     Name = "primary_network_interface"
