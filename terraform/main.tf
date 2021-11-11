@@ -22,6 +22,7 @@ resource "null_resource" "install_docker" {
     cd ~;
     git clone https://github.com/levimurici/suricato-iot && cd suricato-iot;
     docker-compose up -d;
+    fi;
    EOT
   }
 }
