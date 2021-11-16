@@ -32,7 +32,7 @@ resource "aws_instance" "services" {
   }
 }
 
-resource "aws_instance" "zabbix" {
+/* resource "aws_instance" "zabbix" {
     count = 1
     ami = var.amis["ami-services"] # Ubuntu 20.1 LTS x86
     instance_type = "t2.micro"
@@ -42,12 +42,12 @@ resource "aws_instance" "zabbix" {
     }
     vpc_security_group_ids = ["${aws_security_group.acesso-dnd.id}"]
     
-    /* network_interface {
+    network_interface {
       network_interface_id = aws_network_interface.interface-2.id
       device_index         = 0
-    } */
+    }
 }
-
+ */
 resource "aws_s3_bucket" "dump-services" {
   bucket = "suricato-dump-services"
   acl    = "private" # Permissionamento, no caso privado
