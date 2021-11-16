@@ -22,10 +22,9 @@ resource "aws_instance" "services" {
     } */
 
   provisioner "local-exec" {
-    working_dir = "/tmp"
+    working_dir = "/home"
     command     = <<EOT
       sudo apt install -y git
-      cd ~
       git clone https://github.com/levimurici/dnd-initial-scripts && cd dnd-initial-scripts
       chmod +x docker-suricato.sh && ./docker-suricato.sh
     EOT
