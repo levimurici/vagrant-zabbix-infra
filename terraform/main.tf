@@ -21,26 +21,15 @@ resource "aws_instance" "services" {
       device_index         = 0
     }
 
-  /* provisioner "local-exec" {
+  provisioner "local-exec" {
     working_dir = "/tmp"
     command     = <<EOT
-      if ! ``docker --version > /dev/null 2>&1`` ; then 
-        sudo curl -sSL https://get.docker.com/ | sh;
-        sudo usermod -aG docker `echo $USER`;
-        sudo setfacl -m user:`echo $USER`:rw /var/run/docker.sock
-      fi
-      sleep 3;
-      sudo apt-get install -y python3 python3-pip;
-      sudo apt install -y docker-compose;
       sudo apt install -y git;
-      
-      sleep 3; 
       cd ~;
-      git clone https://github.com/levimurici/suricato-iot && cd suricato-iot;
-      docker-compose up -d;
-      fi;
+      git clone https://github.com/levimurici/dnd-initial-scripts && cd dnd-initial-scripts;
+      chmod +x docker-suricato.sh && sudo ./docker-surcicato.sh
     EOT
-  } */
+  }
 }
 
 resource "aws_instance" "zabbix" {
@@ -57,7 +46,6 @@ resource "aws_instance" "zabbix" {
       network_interface_id = aws_network_interface.interface-2.id
       device_index         = 0
     }
-
 }
 
 resource "aws_s3_bucket" "dump-services" {
