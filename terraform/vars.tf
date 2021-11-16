@@ -22,5 +22,5 @@ variable "cdirs_acesso_ssh" {
         "dnd-lab" = "177.50.229.182/32",
         "rede-privada" = "10.0.0.0/16"
     } */
-    default = ["177.50.229.182/32", "10.0.0.0/16"]
+    default = ["177.50.229.182/32", "10.0.0.0/16", "${aws_vpc.dnd_vpc.cidr_block}"]
 }
