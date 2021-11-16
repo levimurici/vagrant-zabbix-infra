@@ -19,7 +19,7 @@ variable "cdirs_acesso_ssh" {
     /* type = "list" */
     /* "dnd-devops-lab" = "177.50.229.182/32" */
     default = {
-        "dnd-lab" = "177.50.229.182/32"/* ,
-        "rede-privada" = "10.0.0.0/16" */
+        "dnd-lab" = "177.50.229.182/32",
+        "rede-privada" = "10.0.0.0/16"
     }
 }
