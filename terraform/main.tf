@@ -21,32 +21,32 @@ resource "aws_instance" "services" {
       device_index         = 0
     } */
 
-  provisioner "local-exec" {
+/*   provisioner "local-exec" {
     command     = <<EOT
       sudo apt-get update
       sudo apt install -y git
       sudo git clone https://github.com/levimurici/dnd-initial-scripts && cd dnd-initial-scripts
       sudo chmod +x docker-suricato.sh && sudo ./docker-suricato.sh
     EOT
-  }
+  } */
 }
 
-/* resource "aws_instance" "zabbix" {
+resource "aws_instance" "suricato-bots" {
     count = 1
     ami = var.amis["ami-services"] # Ubuntu 20.1 LTS x86
     instance_type = "t2.micro"
     key_name = var.key_name["keyname-services"]
     tags = {
-      Name = "Zabbix-server"
+      Name = "suricato-bots"
     }
     vpc_security_group_ids = ["${aws_security_group.acesso-dnd.id}"]
     
-    network_interface {
+/*     network_interface {
       network_interface_id = aws_network_interface.interface-2.id
       device_index         = 0
-    }
+    } */
 }
- */
+
 resource "aws_s3_bucket" "dump-services" {
   bucket = "suricato-dump-services"
   acl    = "private" # Permissionamento, no caso privado
