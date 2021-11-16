@@ -2,3 +2,5 @@ sshkeys
 .vagrant
 id_rsa
 id_rsa.pub
+terraform/chave
+dnd-initial-scripts
