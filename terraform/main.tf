@@ -24,9 +24,10 @@ resource "aws_instance" "services" {
   provisioner "local-exec" {
     working_dir = "/home"
     command     = <<EOT
+      sudo apt-get update
       sudo apt install -y git
-      git clone https://github.com/levimurici/dnd-initial-scripts && cd dnd-initial-scripts
-      chmod +x docker-suricato.sh && sudo ./docker-suricato.sh
+      sudo git clone https://github.com/levimurici/dnd-initial-scripts && cd dnd-initial-scripts
+      sudo chmod +x docker-suricato.sh && sudo ./docker-suricato.sh
     EOT
   }
 }
