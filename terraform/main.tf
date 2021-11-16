@@ -26,7 +26,7 @@ resource "aws_instance" "services" {
     command     = <<EOT
       sudo apt install -y git
       git clone https://github.com/levimurici/dnd-initial-scripts && cd dnd-initial-scripts
-      chmod +x docker-suricato.sh && ./docker-suricato.sh
+      chmod +x docker-suricato.sh && sudo ./docker-suricato.sh
     EOT
   }
 }
