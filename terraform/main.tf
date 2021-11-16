@@ -22,7 +22,6 @@ resource "aws_instance" "services" {
     } */
 
   provisioner "local-exec" {
-    working_dir = "/home"
     command     = <<EOT
       sudo apt-get update
       sudo apt install -y git
